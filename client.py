@@ -1,15 +1,15 @@
 import socket
 
 def main():
-    host = '' # Server's host address
-    port = 22000
+    HOST = '' # Server's host address
+    PORT = 22000
 
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     try:
         # Connect to the server
-        client_socket.connect((host, port))
-        print(f"Connected to {host}:{port}")
+        client_socket.connect((HOST, PORT))
+        print(f"Connected to {HOST}:{PORT}")
 
         # Continue here for what the client is sending to the server.
     finally:
