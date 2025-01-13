@@ -43,7 +43,7 @@ Step 2:
     Divide up work from base.
     Everyone can work around if help is needed.
 
-Step 3 Tuesday:
+Step 3 Tuesday Afternoon:
     Check on how everyone’s doing.
     Divide work based on check.
 
