@@ -3,4 +3,6 @@
 #include <string.h>
 #include <unistd.h>
 #include <arpa/inet.h>
+#include <pthread.h>
 
+#define PORT 12345
