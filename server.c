@@ -5,4 +5,4 @@
 #include <arpa/inet.h>
 #include <pthread.h>
 
-#define PORT 12345
+#define PORT 22000
