@@ -68,17 +68,33 @@ Answer (a, b, c, d): _
 
 Questions:
 How many champions are there?
-
+	~169, 140, 157, 
 What is the highest rank?
-	Challenger
-
-How many items are in the game?
-
+	Challenger, Top 500, Iridescent, GOAT Gamer
+How many legendary items are in the game?
+	108
 How many lanes are there?
 	3 Lanes
-
 What is the thing you need to destroy to win the game?
-	Nexus
+	Nexus, Opponent Mental, 
+How many epic monster camps are there ?
+	6
+Who developed league of legends?
+	Riot Games. Epic Games, Valve, Blizzard 
+How many turrets are on Summoner’s Rift 
+	22
+Who was the first champion designed by Riot Games?
+Singed
+What is the name of the river that runs through Summoner’s Rift?
+	Serpentine River
+Who was the first Champion to receive a legendary skin?
+	Tryndamere
+How many playable champions were available at the launch of the League of Legends beta?
+Seventeen
+When was the video game League of Legends released?
+October 27, 2009
+
+
 
 
 
