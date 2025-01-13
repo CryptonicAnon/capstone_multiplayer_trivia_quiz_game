@@ -48,4 +48,4 @@ Step 3 Tuesday:
     Divide work based on check.
 
 Choose a theme for the trivia questions
-When they connect choose username (
+When they connect choose username
