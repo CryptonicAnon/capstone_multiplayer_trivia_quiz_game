@@ -1,4 +1,5 @@
 import socket
+import time
 
 BUFFERSIZE=1024
 HOST = socket.gethostname() # Server's host address
@@ -17,6 +18,10 @@ def main():
 
         while(continue_game):
             question = client_socket.recv(1024).decode()
+            answer_a = client_socket.recv(1024).decode() 
+            answer_b = client_socket.recv(1024).decode()
+            answer_c = client_socket.recv(1024).decode()
+            answer_d = client_socket.recv(1024).decode()
             correct_answer = client_socket.recv(1024).decode()
             print(question)
             answer = input("answer the question: ")
@@ -27,6 +32,7 @@ def main():
             if answer == correct_answer:
                 print("You got the question right!")
                 score += 1
+                print(f"Your score is now: {score}")
             elif answer != correct_answer:
                 print("You lost GG lbitchoser.")
                 client_socket.close()
