@@ -1,7 +1,8 @@
 import socket
 
 def main():
-    HOST = '' # Server's host address
+    HOST = socket.gethostname() # Server's host address
+    print(HOST)
     PORT = 22000
 
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
