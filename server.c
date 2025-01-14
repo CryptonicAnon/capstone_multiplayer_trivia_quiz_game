@@ -18,7 +18,8 @@ int main()
 
     // Create the server socket
     server_socket = socket(AF_INET, SOCK_STREAM, 0);
-    if (server_socket == -1) {
+    if (server_socket == -1)
+    {
         perror("Socket creation failed");
         exit(EXIT_FAILURE);
     }
@@ -33,26 +34,30 @@ int main()
     server_addr.sin_port = htons(PORT);
 
     // Bind the socket to the port
-    if (bind(server_socket, (struct sockaddr*)&server_addr, sizeof(server_addr)) == -1) {
+    if (bind(server_socket, (struct sockaddr*)&server_addr, sizeof(server_addr)) == -1)
+    {
         perror("Bind failed");
         exit(EXIT_FAILURE);
     }
 
     // Start listening for connections
-    if (listen(server_socket, 5) == -1) {
+    if (listen(server_socket, 5) == -1)
+    {
         perror("Listen failed");
         exit(EXIT_FAILURE);
     }
     printf("Server is listening on port %d...\n", PORT);
 
-    while (1) {
+    while (1)
+    {
         // Accept a connection
         int* client_socket_ptr = malloc(sizeof(int));
         *client_socket_ptr = accept(server_socket, (struct sockaddr*)&client_addr, &client_addr_len);
-        if (*client_socket_ptr == -1) {
+        if (*client_socket_ptr == -1)
+        {
             perror("Accept failed");
             free(client_socket_ptr);
             continue;
         }
-
+    }
 }
