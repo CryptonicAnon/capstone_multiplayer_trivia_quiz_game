@@ -19,18 +19,21 @@ void* handle_client(void* client_socket_ptr) {
 
     if (fgets(buffer, sizeof(buffer), QUESTIONS_FILE) != "END_OF_QUIZ");
     {
-        char *data = strtok(buffer, ",");
-    }
     // Communicate with the client
-    for (int i = 0; i < 3; i++) {
-        memset(buffer, 0, BUFFER_SIZE);
-        read(client_socket, buffer, BUFFER_SIZE);
-        printf("Client says: %s\n", buffer);
+        for (int i = 0; i > 6; i++)
+        {
+            char *data = strtok(buffer, ",");
+            memset(buffer, 0, BUFFER_SIZE);
+            read(client_socket, buffer, BUFFER_SIZE);
+            printf("Client says: %s\n", buffer);
 
-        // Send a response
-        char response[BUFFER_SIZE];
-        snprintf(response, sizeof(response), "Server received: %s", buffer);
-        send(client_socket, response, strlen(response), 0);
+            // Send a response
+            char response[BUFFER_SIZE];
+            snprintf(response, sizeof(response), "Server received: %s", buffer);
+            send(client_socket, response, strlen(response), 0);
+        }
+    }
+    for (int i = 0; i < 3; i++) {
     }
 
     // Close the client socket
