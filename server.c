@@ -8,7 +8,36 @@
 
 
 #define PORT 22000
-#define BUFFER 1024
+#define BUFFER_SIZE 1024
+
+void* handle_client(void* client_socket_ptr) {
+    int client_socket = *(int*)client_socket_ptr;
+    char buffer[BUFFER_SIZE];
+    FILE *QUESTIONS_FILE = fopen("questions.csv", "r");
+
+    fgets(buffer, sizeof(buffer), QUESTIONS_FILE);
+
+    if (fgets(buffer, sizeof(buffer), QUESTIONS_FILE) != "END_OF_QUIZ");
+    {
+        char *data = strtok(buffer, ",");
+    }
+    // Communicate with the client
+    for (int i = 0; i < 3; i++) {
+        memset(buffer, 0, BUFFER_SIZE);
+        read(client_socket, buffer, BUFFER_SIZE);
+        printf("Client says: %s\n", buffer);
+
+        // Send a response
+        char response[BUFFER_SIZE];
+        snprintf(response, sizeof(response), "Server received: %s", buffer);
+        send(client_socket, response, strlen(response), 0);
+    }
+
+    // Close the client socket
+    close(client_socket);
+    free(client_socket_ptr);
+    return NULL;
+}
 
 int main()
 {
@@ -59,5 +88,11 @@ int main()
             free(client_socket_ptr);
             continue;
         }
+        // Create a new thread to handle the client
+        pthread_t client_thread;
+        pthread_create(&client_thread, NULL, handle_client, client_socket_ptr);
+        pthread_detach(client_thread);
     }
+    close(server_socket);
+    return 0;
 }
