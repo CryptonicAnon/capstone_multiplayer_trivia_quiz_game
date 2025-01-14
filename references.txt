@@ -1,1 +1,5 @@
+Python Reference:
 https://github.com/Rit-ctrl/Multi-client-quiz-game
+
+C Reference:
+https://github.com/dandex200/tcp_quiz_client-server/tree/main
