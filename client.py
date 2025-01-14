@@ -20,14 +20,14 @@ def main():
 
         while(continue_game):
             question = client_socket.recv(1024).decode()
-            answer_a = client_socket.recv(1024).decode() 
-            answer_b = client_socket.recv(1024).decode()
-            answer_c = client_socket.recv(1024).decode()
-            answer_d = client_socket.recv(1024).decode()
+            answer_a = str(client_socket.recv(1024).decode())
+            answer_b = str(client_socket.recv(1024).decode())
+            answer_c = str(client_socket.recv(1024).decode())
+            answer_d = str(client_socket.recv(1024).decode())
             correct_answer = client_socket.recv(1024).decode()
             print(question)
             answer = input("answer the question: ")
-            client_socket.send(answer)
+            client_socket.send(answer.encode("utf-8"))
 
             print(f"The correct answer was: {correct_answer}")
 
@@ -43,7 +43,7 @@ def main():
             else:
                 print("this didnt work")
 
-        client_socket.send(username, score)            
+        client_socket.send(username.encode("utf-8"), score.encode("utf-8"))            
 
     finally:
         # Close the connection
