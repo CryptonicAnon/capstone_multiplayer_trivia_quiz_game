@@ -16,7 +16,7 @@ def main():
         client_socket.connect((HOST, PORT))
         print(f"Connected to {HOST}:{PORT}")
 
-        username = input("Please select a username: ")
+        # username = input("Please select a username: ")
 
         while(continue_game):
             question = client_socket.recv(1024).decode()
@@ -25,10 +25,17 @@ def main():
             answer_c = str(client_socket.recv(1024).decode())
             answer_d = str(client_socket.recv(1024).decode())
             correct_answer = client_socket.recv(1024).decode()
+            correct_answer = correct_answer.strip()
             print(question)
             answer = input("answer the question: ")
-            client_socket.send(answer.encode("utf-8"))
+            answer = answer.upper()
 
+            print(f"Question: {question}")
+            print(f"Answer A: {answer_a}")
+            print(f"Answer B: {answer_b}")
+            print(f"Answer C: {answer_c}")
+            print(f"Answer D: {answer_d}")
+            print(f"{answer}")
             print(f"The correct answer was: {correct_answer}")
 
             if answer == correct_answer:
@@ -42,8 +49,9 @@ def main():
                 quit()
             else:
                 print("this didnt work")
+            client_socket.send(answer.encode("utf-8"))
 
-        client_socket.send(username.encode("utf-8"), score.encode("utf-8"))            
+        client_socket.send(username.encode("utf-8"), score.encode("utf-8"))
 
     finally:
         # Close the connection
