@@ -47,6 +47,8 @@ void* handle_client(void* client_socket_ptr) {
         printf("Going to check the do while end.");
     } while (read(client_socket, buffer, BUFFER_SIZE));
 
+    read(client_socket, buffer, BUFFER_SIZE);
+
     // Close the client socket
     close(client_socket);
     free(client_socket_ptr);
@@ -113,7 +115,13 @@ int socketLogic()
         printf("\nwe hit point 05\n");
         pthread_detach(client_thread);
     }
+
     printf("\nwe hit point 06\n");
     close(server_socket);
     return 0;
+}
+
+main()
+{
+    socketLogic();
 }
