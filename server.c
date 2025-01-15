@@ -53,7 +53,7 @@ void* handle_client(void* client_socket_ptr) {
     return NULL;
 }
 
-int main()
+int socketLogic()
 {
     printf("\nSTARTD MAIN FUNCTION\n");
     int server_socket;
