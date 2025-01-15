@@ -44,22 +44,21 @@ def main():
                 print(f"Your score is now: {score}")
             elif answer != correct_answer:
                 print("You lost GG lbitchoser.")
-                client_socket.close()
-                print("Connection closed.")
-                quit()
+                break
             else:
                 print("this didnt work")
             client_socket.send(answer.encode("utf-8"))
 
-        client_socket.send(username.encode("utf-8"), score.encode("utf-8"))
+        game_over = client_socket.recv(1024).decode()
+        print(game_over)
+
+        client_socket.send(score.encode("utf-8"))
 
         final_scores = client_socket.recv(1024).decode()
         final_scores = final_scores.split()
+        final_scores = final_scores.sort()
         for i in range(len(final_scores)):
-            print(f"{final_scores[i]}: ")
-            i+=1
-            print(f"{final_scores[i]}")
-
+            print(f"{i}th place got: {final_scores[i]}")
 
     finally:
         # Close the connection
