@@ -43,7 +43,15 @@ def main():
             else:
                 print("this didnt work")
 
-        client_socket.send(username.encode("utf-8"), score.encode("utf-8"))            
+        client_socket.send(username.encode("utf-8"), score.encode("utf-8"))
+
+        final_scores = client_socket.recv(1024).decode()
+        final_scores = final_scores.split()
+        for i in range(len(final_scores)):
+            print(f"{final_scores[i]}: ")
+            i+=1
+            print(f"{final_scores[i]}")
+
 
     finally:
         # Close the connection
