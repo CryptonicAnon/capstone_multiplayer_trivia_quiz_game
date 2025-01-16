@@ -23,10 +23,13 @@ void* handle_client(void* client_socket_ptr) {
     }
     // Disregarding the description line
     fgets(buffer, sizeof(buffer), QUESTIONS_FILE);
-    fgets(buffer, sizeof(buffer), QUESTIONS_FILE);
 
     do
     {
+        if (fgets(buffer, sizeof(buffer), QUESTIONS_FILE) == NULL)
+        {
+            break;
+        }
         // Communicate with the client
         char *data = strtok(buffer, ",");
         while (data != NULL)
@@ -41,7 +44,7 @@ void* handle_client(void* client_socket_ptr) {
             usleep(50000);
             data = strtok(NULL, ",");
         }
-        if (fgets(buffer, sizeof(buffer), QUESTIONS_FILE) == NULL || strcmp(buffer, "END_OF_QUIZ\n") == 0)
+        if (strcmp(buffer, "END_OF_QUIZ\n") == 0)
         {
             break;
         }
