@@ -47,7 +47,9 @@ void* handle_client(void* client_socket_ptr) {
         printf("Going to check the do while end.");
     } while (read(client_socket, buffer, BUFFER_SIZE));
 
+    printf("I am here.");
     read(client_socket, buffer, BUFFER_SIZE);
+    printf(buffer);
 
     // Close the client socket
     close(client_socket);
