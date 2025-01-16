@@ -26,15 +26,14 @@ def main():
             answer_d = str(client_socket.recv(1024).decode())
             correct_answer = client_socket.recv(1024).decode()
             correct_answer = correct_answer.strip()
-            print(question)
-            answer = input("answer the question: ")
-            answer = answer.upper()
 
-            print(f"Question: {question}")
-            print(f"Answer A: {answer_a}")
-            print(f"Answer B: {answer_b}")
-            print(f"Answer C: {answer_c}")
-            print(f"Answer D: {answer_d}")
+            print(f"\n{question}")
+            print(f"A: {answer_a}")
+            print(f"B: {answer_b}")
+            print(f"C: {answer_c}")
+            print(f"D: {answer_d}")
+            answer = input("Answer the question: ")
+            answer = answer.upper()
             print(f"{answer}")
             print(f"The correct answer was: {correct_answer}")
 
@@ -44,7 +43,6 @@ def main():
                 print(f"Your score is now: {score}")
             elif answer != correct_answer:
                 print("You lost GG lbitchoser.")
-                break
             else:
                 print("this didnt work")
             client_socket.send(answer.encode("utf-8"))
