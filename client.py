@@ -40,20 +40,21 @@ def main():
                 score += 1
                 print(f"Your score is now: {score}")
                 time.sleep(1)
+                client_socket.send(answer.encode("utf-8"))
 
             elif answer != correct_answer:
                 print(f"The correct answer was: {correct_answer}\n")
                 print("You lost GG loser.")
                 print(f"You got {score} correct.")
+                score = str(score)
+                client_socket.send("0".encode("utf-8"))
                 time.sleep(1)
                 quit()
             else:
                 print("this didnt work")
-            client_socket.send(answer.encode("utf-8"))
 
         game_over = client_socket.recv(1024).decode()
         print(game_over)
-
         client_socket.send(score.encode("utf-8"))
 
         final_scores = client_socket.recv(1024).decode()
