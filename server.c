@@ -11,7 +11,6 @@
 #define BUFFER_SIZE 1024
 
 void* handle_client(void* client_socket_ptr) {
-    printf("\nSTARTED HANDLE_CLIENT FUNCTION\n");
     int client_socket = *(int*)client_socket_ptr;
     char buffer[BUFFER_SIZE];
     FILE *QUESTIONS_FILE = fopen("../questions.csv", "r");
@@ -23,21 +22,18 @@ void* handle_client(void* client_socket_ptr) {
     return NULL;
     }
 
-    printf("\nwe hit point 1.2\n");
     fgets(buffer, sizeof(buffer), QUESTIONS_FILE);
     fgets(buffer, sizeof(buffer), QUESTIONS_FILE);
-    printf("\nwe hit point 1\n");
 
     do
     {
-        printf("\nENTERED WHILE LOOP\n");
         // Communicate with the client
         char *data = strtok(buffer, ",");
         while (data != NULL)
         {
             printf("Sent: %s\n", data);
             send(client_socket, data, strlen(data), 0);
-            usleep(500000);
+            usleep(50000);
             data = strtok(NULL, ",");
         }
         if (fgets(buffer, sizeof(buffer), QUESTIONS_FILE) == "END_OF_QUIZ")
@@ -47,7 +43,6 @@ void* handle_client(void* client_socket_ptr) {
         printf("Going to check the do while end.");
     } while (read(client_socket, buffer, BUFFER_SIZE));
 
-    printf("I am here.");
     read(client_socket, buffer, BUFFER_SIZE);
     printf(buffer);
 
@@ -59,7 +54,6 @@ void* handle_client(void* client_socket_ptr) {
 
 int socketLogic()
 {
-    printf("\nSTARTD MAIN FUNCTION\n");
     int server_socket;
     struct sockaddr_in server_addr, client_addr;
     socklen_t client_addr_len = sizeof(client_addr);
@@ -88,7 +82,6 @@ int socketLogic()
         exit(EXIT_FAILURE);
     }
 
-    printf("\nwe hit point 01\n");
     // Start listening for connections
     if (listen(server_socket, 5) == -1)
     {
@@ -97,28 +90,23 @@ int socketLogic()
     }
     printf("Server is listening on port %d...\n", PORT);
 
-    printf("\nwe hit point 02\n");
     while (1)
     {
         // Accept a connection
         int* client_socket_ptr = malloc(sizeof(int));
         *client_socket_ptr = accept(server_socket, (struct sockaddr*)&client_addr, &client_addr_len);
-        printf("\nwe hit point 03\n");
         if (*client_socket_ptr == -1)
         {
             perror("Accept failed");
             free(client_socket_ptr);
             continue;
         }
-        printf("\nwe hit point 04\n");
         // Create a new thread to handle the client
         pthread_t client_thread;
         pthread_create(&client_thread, NULL, handle_client, client_socket_ptr);
-        printf("\nwe hit point 05\n");
         pthread_detach(client_thread);
     }
 
-    printf("\nwe hit point 06\n");
     close(server_socket);
     return 0;
 }

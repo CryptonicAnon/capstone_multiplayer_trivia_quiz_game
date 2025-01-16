@@ -34,15 +34,19 @@ def main():
             print(f"D: {answer_d}")
             answer = input("Answer the question: ")
             answer = answer.upper()
-            print(f"{answer}")
-            print(f"The correct answer was: {correct_answer}")
 
             if answer == correct_answer:
                 print("You got the question right!")
                 score += 1
                 print(f"Your score is now: {score}")
+                time.sleep(1)
+
             elif answer != correct_answer:
-                print("You lost GG lbitchoser.")
+                print(f"The correct answer was: {correct_answer}\n")
+                print("You lost GG loser.")
+                print(f"You got {score} correct.")
+                time.sleep(1)
+                quit()
             else:
                 print("this didnt work")
             client_socket.send(answer.encode("utf-8"))
