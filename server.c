@@ -16,12 +16,12 @@ void* handle_client(void* client_socket_ptr) {
     FILE *QUESTIONS_FILE = fopen("../questions.csv", "r");
     if (QUESTIONS_FILE == NULL)
     {
-    perror("Failed to open questions.csv");
-    close(client_socket);
-    free(client_socket_ptr);
-    return NULL;
+        perror("Failed to open questions.csv");
+        close(client_socket);
+        free(client_socket_ptr);
+        return NULL;
     }
-
+    // Disregarding the description line
     fgets(buffer, sizeof(buffer), QUESTIONS_FILE);
     fgets(buffer, sizeof(buffer), QUESTIONS_FILE);
 
@@ -31,20 +31,22 @@ void* handle_client(void* client_socket_ptr) {
         char *data = strtok(buffer, ",");
         while (data != NULL)
         {
+            int len = strlen(data);
+            if (len > 0 && data[len - 1] == '\n')
+            {
+                data[len - 1] = '\0'; // Replace newline with null character
+            }
             printf("Sent: %s\n", data);
             send(client_socket, data, strlen(data), 0);
             usleep(50000);
             data = strtok(NULL, ",");
         }
-        if (fgets(buffer, sizeof(buffer), QUESTIONS_FILE) == "END_OF_QUIZ")
+        if (fgets(buffer, sizeof(buffer), QUESTIONS_FILE) == NULL || strcmp(buffer, "END_OF_QUIZ\n") == 0)
         {
             break;
         }
-        printf("Going to check the do while end.");
     } while (read(client_socket, buffer, BUFFER_SIZE));
 
-    read(client_socket, buffer, BUFFER_SIZE);
-    printf(buffer);
 
     // Close the client socket
     close(client_socket);
