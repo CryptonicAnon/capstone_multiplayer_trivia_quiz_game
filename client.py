@@ -43,7 +43,6 @@ def main():
                 print(f"Your score is now: {score}")
             elif answer != correct_answer:
                 print("You lost GG lbitchoser.")
-                break
             else:
                 print("this didnt work")
             client_socket.send(answer.encode("utf-8"))
