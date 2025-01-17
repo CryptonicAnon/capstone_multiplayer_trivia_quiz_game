@@ -20,6 +20,8 @@ def main():
 
         while(continue_game):
             question = client_socket.recv(1024).decode()
+            if question == "e":
+                break
             answer_a = str(client_socket.recv(1024).decode())
             answer_b = str(client_socket.recv(1024).decode())
             answer_c = str(client_socket.recv(1024).decode())
@@ -43,18 +45,18 @@ def main():
                 client_socket.send(answer.encode("utf-8"))
 
             elif answer != correct_answer:
-                print(f"The correct answer was: {correct_answer}\n")
+                print(f"The correct answer was: {correct_answer}")
                 print("You lost GG loser.")
-                print(f"You got {score} correct.")
-                score = str(score)
-                client_socket.send("0".encode("utf-8"))
                 time.sleep(1)
-                quit()
+                client_socket.send(answer.encode("utf-8"))
             else:
                 print("this didnt work")
+        print("game ended")
 
-        game_over = client_socket.recv(1024).decode()
-        print(game_over)
+        print(f"Your final score was: {score}")
+        # game_over = client_socket.recv(1024).decode()
+        # print(game_over)
+        score = str(score)
         client_socket.send(score.encode("utf-8"))
 
         final_scores = client_socket.recv(1024).decode()
