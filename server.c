@@ -9,12 +9,10 @@
 
 #define PORT 22000
 #define BUFFER_SIZE 1024
-int counin = 0;
 
 void* handle_client(void* client_socket_ptr) {
     int client_socket = *(int*)client_socket_ptr;
     char buffer[BUFFER_SIZE];
-    char servrep[10];
     FILE *QUESTIONS_FILE = fopen("../questions.csv", "r");
     if (QUESTIONS_FILE == NULL)
     {
@@ -53,22 +51,6 @@ void* handle_client(void* client_socket_ptr) {
         }
     } while (read(client_socket, buffer, BUFFER_SIZE));
     send(client_socket, "e", strlen("e"), 0);
-
-    printf("testing");
-    // for (int i = 0; i < counin; i++)
-    // {
-    //     char i[10] = recv(client_socket, servrep, 10, 0);
-    // }
-    // for (int i = 0; counin < 0; counin--)
-    // {
-    //     /* code */
-    // }
-
-    recv(client_socket, servrep, 10, 0);
-    printf("%c\n", servrep);
-    // Close the client socket
-    // close(client_socket);
-    // free(client_socket_ptr);
 
     return NULL;
 }
@@ -125,7 +107,6 @@ int socketLogic()
         // Create a new thread to handle the client
         pthread_t client_thread;
         pthread_create(&client_thread, NULL, handle_client, client_socket_ptr);
-        counin++;
         pthread_detach(client_thread);
     }
 
