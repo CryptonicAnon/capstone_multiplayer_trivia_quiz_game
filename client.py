@@ -46,8 +46,8 @@ def main():
 
             elif answer != correct_answer:
                 print(f"The correct answer was: {correct_answer}")
-                print("You got it wrong. GG loser.")
-                print(f"Your score is now: {score}")
+                print("You lost GG loser.")
+                print(f"Your score is: {score}")
                 time.sleep(1)
                 client_socket.send(answer.encode("utf-8"))
             else:
@@ -55,16 +55,6 @@ def main():
         print("game ended")
 
         print(f"Your final score was: {score}")
-        # game_over = client_socket.recv(1024).decode()
-        # print(game_over)
-        score = str(score)
-        client_socket.send(score.encode("utf-8"))
-
-        final_scores = client_socket.recv(1024).decode()
-        final_scores = final_scores.split()
-        final_scores = final_scores.sort()
-        for i in range(len(final_scores)):
-            print(f"{i}th place got: {final_scores[i]}")
 
     finally:
         # Close the connection
