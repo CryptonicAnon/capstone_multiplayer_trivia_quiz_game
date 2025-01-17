@@ -15,7 +15,6 @@ void* handle_client(void* client_socket_ptr) {
     int client_socket = *(int*)client_socket_ptr;
     char buffer[BUFFER_SIZE];
     char servrep[10];
-    char bullshit[50];
     FILE *QUESTIONS_FILE = fopen("../questions.csv", "r");
     if (QUESTIONS_FILE == NULL)
     {
@@ -64,7 +63,7 @@ void* handle_client(void* client_socket_ptr) {
     // {
     //     /* code */
     // }
-    
+
     recv(client_socket, servrep, 10, 0);
     printf("%c\n", servrep);
     // Close the client socket
