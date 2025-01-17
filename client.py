@@ -46,7 +46,8 @@ def main():
 
             elif answer != correct_answer:
                 print(f"The correct answer was: {correct_answer}")
-                print("You lost GG loser.")
+                print("You got it wrong. GG loser.")
+                print(f"Your score is now: {score}")
                 time.sleep(1)
                 client_socket.send(answer.encode("utf-8"))
             else:
